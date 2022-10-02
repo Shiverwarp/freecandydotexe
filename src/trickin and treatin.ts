@@ -37,7 +37,9 @@ import {
   $monster,
   $skill,
   $skills,
+  $slot,
   $slots,
+  Counter,
   get,
   getKramcoWandererChance,
   have,
@@ -72,7 +74,8 @@ const treatOutfit = bestOutfit();
 const tot = $familiar`Trick-or-Treating Tot`;
 const prepareToTreat = () => {
   if (have(tot)) useFamiliar(tot);
-  outfit("birthday suit");
+  equip($slot`weapon`, $item.none);
+  equip($slot`off-hand`, $item.none);
   outfit(treatOutfit);
   for (const slot of $slots`acc1, acc2, acc3`) {
     if (equippedItem(slot) === $item.none && itemAmount($item`lucky Crimbo tiki necklace`) > 0) {
@@ -218,7 +221,7 @@ export function runBlocks(blocks = -1): void {
         );
       }
 
-      if (getCounters("Digitize", -11, 0) !== "") {
+      if (Counter.get("Digitize") <= 0) {
         printHighlight(`It's digitize time!`);
         const digitizeMacro = Macro.externalIf(
           myAdventures() * 1.1 <
@@ -246,20 +249,18 @@ export function runBlocks(blocks = -1): void {
         useFamiliar(trickFamiliar());
       }
 
-      if (have($item`Kramco Sausage-o-Matic™`)) {
-        if (getKramcoWandererChance() >= 1) {
-          fightOutfit("Kramco");
-          advMacroAA(
-            drunkSafeWander("wanderer"),
-            trickMacro,
-            () => getKramcoWandererChance() >= 1,
-            () => {
-              fillPantsgivingFullness();
-              safeRestore();
-              juneCleave();
-            }
-          );
-        }
+      if (have($item`Kramco Sausage-o-Matic™`) && getKramcoWandererChance() >= 1) {
+        fightOutfit("Kramco");
+        advMacroAA(
+          drunkSafeWander("wanderer"),
+          trickMacro,
+          () => getKramcoWandererChance() >= 1,
+          () => {
+            fillPantsgivingFullness();
+            safeRestore();
+            juneCleave();
+          }
+        );
       }
 
       if (have($item`"I Voted!" sticker`)) {
