@@ -70,7 +70,7 @@ export default class Macro extends StrictMacro {
     return this.try([
       $skill`Curse of Weaksauce`,
       $skill`Micrometeorite`,
-      $skill`Shadow Noodles`,
+      $skill`Bowl Straight Up`,
       $skill`Shell Up`,
       $item`Time-Spinner`,
       $item`little red book`,

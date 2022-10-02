@@ -221,6 +221,7 @@ export function fightOutfit(type: fightType = "Trick"): void {
     const bonusEquips = new Map<Item, number>([
       [$item`lucky gold ring`, 400],
       [$item`Mr. Cheeng's spectacles`, 250],
+      [$item`can of mixed everything`, 67],
       [$item`pantogram pants`, get("_pantogramModifier").includes("Drops Items") ? 100 : 0],
       [$item`Mr. Screege's spectacles`, 180],
       [
