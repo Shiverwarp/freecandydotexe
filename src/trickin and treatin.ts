@@ -57,7 +57,7 @@ import {
   safeRestore,
   trickFamiliar,
 } from "./lib";
-import { bestOutfit, fightOutfit, getPantsgivingFood, meatOutfit } from "./outfit";
+import { bestOutfit, fightOutfit, getPantsgivingFood, gooseOutfit, meatOutfit } from "./outfit";
 import Macro from "./combat";
 import { drunkSafeWander, wanderWhere } from "./wanderer";
 
@@ -157,12 +157,7 @@ export function canGorge(): boolean {
 
 function fillPantsgivingFullness(): void {
   if (!canGorge()) return;
-  if (!get("_fudgeSporkUsed")) {
-    retrieveItem($item`fudge spork`);
-    eat($item`fudge spork`);
-  }
-  retrieveItem(getPantsgivingFood().food);
-  eat(getPantsgivingFood().food);
+  throw `We have pantsgiving fullness! Time to eat!`;
 }
 
 export function runBlocks(blocks = -1): void {
@@ -182,7 +177,12 @@ export function runBlocks(blocks = -1): void {
         .externalIf(SourceTerminal.isCurrentSkill($skill`Extract`), Macro.skill($skill`Extract`))
         .kill();
 
-  const digitizeMacro = Macro.stasis;
+  const gooseDupeMacro = Macro.trySkill($skill`Pocket Crumbs`)
+    .item([$item`HOA citation pad`, $item`porquoise-handled sixgun`])
+    .item([$item`train whistle`, $item`Rain-Doh indigo cup`])
+    .trySkill($skill`Emit Matter Duplicating Drones`)
+    .stasis()
+    .kill();
 
   let n = 0;
   const hasBlocksRemaining = () => (blocks >= 0 ? n < blocks : myAdventures() >= 5);
@@ -233,11 +233,14 @@ export function runBlocks(blocks = -1): void {
                   (1 + get("_sourceTerminalDigitizeMonsterCount"))) -
                 3),
           Macro.trySkill($skill`Digitize`)
-        ).step(trickMacro);
+        ).step(gooseDupeMacro);
         if (get("_sourceTerminalDigitizeMonster") === $monster`Knob Goblin Embezzler`) {
           useFamiliar(meatFamiliar());
           meatOutfit();
-        } else fightOutfit("Digitize");
+        } else {
+          useFamiliar($familiar`Grey Goose`);
+          gooseOutfit();
+        }
         advMacroAA(
           drunkSafeWander("wanderer"),
           digitizeMacro,

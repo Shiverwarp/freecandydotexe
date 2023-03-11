@@ -558,6 +558,34 @@ export function meatOutfit(): void {
   else if (haveEquipped($item`Crown of Thrones`)) enthroneFamiliar(bjornFam.familiar);
 }
 
+export function gooseOutfit(): void {
+  const bjornFam = pickBjorn();
+  const bjornalike = bestBjornalike([]);
+  new Requirement(["9999 Familiar Experience 11 max"], {
+    bonusEquip: new Map<Item, number>([
+      [$item`lucky gold ring`, 400],
+      [$item`Mr. Cheeng's spectacles`, 250],
+      [$item`pantogram pants`, get("_pantogramModifier").includes("Drops Items") ? 100 : 0],
+      [$item`Mr. Screege's spectacles`, 180],
+      [$item`can of mixed everything`, 69],
+      [
+        $item`bag of many confections`,
+        getSaleValue(...$items`Polka Pop, BitterSweetTarts, Piddles`) / 6,
+      ],
+      ...snowSuit(),
+      ...mayflowerBouquet(),
+      ...juneCleaver(),
+      ...lilDocBag(),
+      [$item`mafia thumb ring`, 0.04 * overallAdventureValue()],
+      ...(bjornalike ? new Map([[bjornalike, riderValue(bjornFam)]]) : []),
+    ]),
+    preventEquip: $items`Buddy Bjorn, Crown of Thrones`.filter((bjorn) => bjorn !== bjornalike),
+    forceEquip: myInebriety() > inebrietyLimit() ? $items`Drunkula's wineglass` : [],
+  }).maximize();
+  if (haveEquipped($item`Buddy Bjorn`)) bjornifyFamiliar(bjornFam.familiar);
+  else if (haveEquipped($item`Crown of Thrones`)) enthroneFamiliar(bjornFam.familiar);
+}
+
 function bestBjornalike(existingForceEquips: Item[]): Item | undefined {
   const bjornalikes = $items`Buddy Bjorn, Crown of Thrones`;
   const slots = bjornalikes
@@ -603,7 +631,7 @@ function lilDocBag() {
   }
 
   if (get("questDoctorBag") === "unstarted") {
-    return new Map<Item, number>([[$item`Lil' Doctor™ bag`, 220]]);
+    return new Map<Item, number>([[$item`Lil' Doctor™ bag`, 500]]);
   } else {
     return new Map<Item, number>([]);
   }
