@@ -182,6 +182,8 @@ export function runBlocks(blocks = -1): void {
         .externalIf(SourceTerminal.isCurrentSkill($skill`Extract`), Macro.skill($skill`Extract`))
         .kill();
 
+  const digitizeMacro = Macro.stasis;
+
   let n = 0;
   const hasBlocksRemaining = () => (blocks >= 0 ? n < blocks : myAdventures() >= 5);
   const nemesisStep = () => questStep("questG04Nemesis");
