@@ -380,6 +380,7 @@ function overallAdventureValue(): number {
     [$item`Mr. Cheeng's spectacles`, 250],
     [$item`pantogram pants`, get("_pantogramModifier").includes("Drops Items") ? 100 : 0],
     [$item`Mr. Screege's spectacles`, 180],
+    [$item`can of mixed everything`, 69],
     [
       $item`bag of many confections`,
       getSaleValue(...$items`Polka Pop, BitterSweetTarts, Piddles`) / 6,
@@ -536,6 +537,7 @@ export function meatOutfit(): void {
       [$item`Mr. Cheeng's spectacles`, 250],
       [$item`pantogram pants`, get("_pantogramModifier").includes("Drops Items") ? 100 : 0],
       [$item`Mr. Screege's spectacles`, 180],
+      [$item`can of mixed everything`, 69],
       [
         $item`bag of many confections`,
         getSaleValue(...$items`Polka Pop, BitterSweetTarts, Piddles`) / 6,
