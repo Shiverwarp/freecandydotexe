@@ -230,6 +230,7 @@ export function fightOutfit(type: fightType = "Trick"): void {
       ...mayflowerBouquet(),
       ...pantsgiving(),
       ...juneCleaver(),
+      ...lilDocBag(),
     ]);
 
     switch (type) {
@@ -388,6 +389,7 @@ function overallAdventureValue(): number {
     ...snowSuit(),
     ...mayflowerBouquet(),
     ...juneCleaver(),
+    ...lilDocBag(),
     ...sweatpants(),
   ]);
   const treatsAndBonusEquips =
@@ -545,6 +547,7 @@ export function meatOutfit(): void {
       ...snowSuit(),
       ...mayflowerBouquet(),
       ...juneCleaver(),
+      ...lilDocBag(),
       [$item`mafia thumb ring`, 0.04 * overallAdventureValue()],
       ...(bjornalike ? new Map([[bjornalike, riderValue(bjornFam)]]) : []),
     ]),
@@ -592,6 +595,18 @@ function juneCleaver(): Map<Item, number> {
   }
 
   return new Map<Item, number>([[$item`June cleaver`, juneCleaverEV / JuneCleaver.getInterval()]]);
+}
+
+function lilDocBag() {
+  if (!have($item`Lil' Doctor™ bag`)) {
+    return new Map<Item, number>([]);
+  }
+
+  if (get("questDoctorBag") === "unstarted") {
+    return new Map<Item, number>([[$item`Lil' Doctor™ bag`, 220]]);
+  } else {
+    return new Map<Item, number>([]);
+  }
 }
 
 function sweatpants() {

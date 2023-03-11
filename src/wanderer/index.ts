@@ -1,6 +1,7 @@
 import { inebrietyLimit, Location, myInebriety } from "kolmafia";
 import { $location } from "libram";
 import { manager, printHighlight } from "../lib";
+import { docBagFactory } from "./docbag";
 import { guzzlrFactory } from "./guzzlr";
 import {
   canAdventureOrUnlock,
@@ -18,6 +19,7 @@ export type DraggableFight = "backup" | "wanderer" | "yellow ray";
 
 const wanderFactories: WandererFactory[] = [
   defaultFactory,
+  docBagFactory,
   yellowRayFactory,
   lovebugsFactory,
   guzzlrFactory,
