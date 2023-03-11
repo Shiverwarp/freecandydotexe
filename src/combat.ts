@@ -69,6 +69,7 @@ export default class Macro extends StrictMacro {
   stasis(): Macro {
     return this.try([
       $skill`Curse of Weaksauce`,
+      $skill`Pocket Crumbs`,
       $skill`Micrometeorite`,
       $item`train whistle`,
       $item`Time-Spinner`,
