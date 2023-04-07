@@ -224,6 +224,8 @@ export function runBlocks(blocks = -1): void {
 
       if (Counter.get("Digitize") <= 0) {
         printHighlight(`It's digitize time!`);
+        cliExecute("tcrsgain familiar experience 5 eff");
+        cliExecute("tcrsgain 900 item 7 eff");
         const digitizeMacro = Macro.externalIf(
           myAdventures() * 1.1 <
             (3 - digitizes) *
