@@ -115,6 +115,7 @@ function canWanderTypeWander(location: Location): boolean {
 
 export function canWander(location: Location, type: DraggableFight): boolean {
   if (underwater(location)) return false;
+  if (location.environment === "outdoor") return false;
   switch (type) {
     case "backup":
       return canWanderTypeBackup(location);

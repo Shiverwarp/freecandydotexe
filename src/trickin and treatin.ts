@@ -1,6 +1,5 @@
 import {
   cliExecute,
-  eat,
   equip,
   equippedItem,
   fullnessLimit,
@@ -57,7 +56,7 @@ import {
   safeRestore,
   trickFamiliar,
 } from "./lib";
-import { bestOutfit, fightOutfit, getPantsgivingFood, gooseOutfit, meatOutfit } from "./outfit";
+import { bestOutfit, fightOutfit, gooseOutfit, meatOutfit } from "./outfit";
 import Macro from "./combat";
 import { drunkSafeWander, wanderWhere } from "./wanderer";
 
