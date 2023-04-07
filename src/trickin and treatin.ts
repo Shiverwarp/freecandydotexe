@@ -5,6 +5,7 @@ import {
   fullnessLimit,
   gametimeToInt,
   getCounters,
+  getWorkshed,
   inebrietyLimit,
   inMultiFight,
   itemAmount,
@@ -156,7 +157,9 @@ export function canGorge(): boolean {
 
 function fillPantsgivingFullness(): void {
   if (!canGorge()) return;
-  throw `We have pantsgiving fullness! Time to eat!`;
+  if (getWorkshed() === $item`portable Mayo Clinic`) {
+    cliExecute("2crsHalloweenDiet.ash");
+  }
 }
 
 export function runBlocks(blocks = -1): void {
