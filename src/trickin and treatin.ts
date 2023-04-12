@@ -176,7 +176,10 @@ export function runBlocks(blocks = -1): void {
         .kill()
     : Macro.if_(`monsterid ${toInt($monster`All-Hallow's Steve`)}`, Macro.abort())
         .trySkill($skill`Bowl Straight Up`)
-        .try([...$skills`Curse of Weaksauce, Micrometeorite, Sing Along`])
+        .try([
+          ...$skills`Curse of Weaksauce, Micrometeorite, Sing Along`,
+          $item`porquoise-handled sixgun`,
+        ])
         .externalIf(SourceTerminal.isCurrentSkill($skill`Extract`), Macro.skill($skill`Extract`))
         .kill();
 
