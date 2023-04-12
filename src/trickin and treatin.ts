@@ -134,6 +134,7 @@ function trick(trickMacro: Macro) {
       runCombat(trickMacro.toString());
       while (inMultiFight()) runCombat(trickMacro.toString());
       if (choiceFollowsFight()) runChoice(-1);
+      if (itemAmount($item`autumn-aton`) > 0) cliExecute("sendAutumnaton.js");
       fillPantsgivingFullness();
       safeRestore();
       if (juneCleave()) block();
@@ -221,6 +222,7 @@ export function runBlocks(blocks = -1): void {
           () => get("questPAGhost") !== "unstarted",
           () => {
             if (choiceFollowsFight()) runChoice(-1);
+            if (itemAmount($item`autumn-aton`) > 0) cliExecute("sendAutumnaton.js");
             fillPantsgivingFullness();
             safeRestore();
             juneCleave();
@@ -254,6 +256,7 @@ export function runBlocks(blocks = -1): void {
           () => getCounters("Digitize", -11, 0) !== "",
           () => {
             if (choiceFollowsFight()) runChoice(-1);
+            if (itemAmount($item`autumn-aton`) > 0) cliExecute("sendAutumnaton.js");
             fillPantsgivingFullness();
             safeRestore();
             juneCleave();
@@ -270,6 +273,7 @@ export function runBlocks(blocks = -1): void {
           () => getKramcoWandererChance() >= 1,
           () => {
             if (choiceFollowsFight()) runChoice(-1);
+            if (itemAmount($item`autumn-aton`) > 0) cliExecute("sendAutumnaton.js");
             fillPantsgivingFullness();
             safeRestore();
             juneCleave();
@@ -290,6 +294,7 @@ export function runBlocks(blocks = -1): void {
             () => totalTurnsPlayed() % 11 === 1 && get("_voteFreeFights") === currentVotes,
             () => {
               if (choiceFollowsFight()) runChoice(-1);
+              if (itemAmount($item`autumn-aton`) > 0) cliExecute("sendAutumnaton.js");
               fillPantsgivingFullness();
               safeRestore();
               juneCleave();
@@ -323,6 +328,7 @@ export function runBlocks(blocks = -1): void {
         runSource.constraints.equipmentRequirements?.().maximize?.();
         advMacroAA(wanderWhere("backup"), runSource.macro);
         if (choiceFollowsFight()) runChoice(-1);
+        if (itemAmount($item`autumn-aton`) > 0) cliExecute("sendAutumnaton.js");
         fillPantsgivingFullness();
         safeRestore();
         juneCleave();
@@ -335,6 +341,7 @@ export function runBlocks(blocks = -1): void {
         advMacroAA(drunkSafeWander("wanderer"), trickMacro);
         () => {
           if (choiceFollowsFight()) runChoice(-1);
+          if (itemAmount($item`autumn-aton`) > 0) cliExecute("sendAutumnaton.js");
           fillPantsgivingFullness();
           safeRestore();
           juneCleave();
