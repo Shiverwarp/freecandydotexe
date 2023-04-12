@@ -71,7 +71,6 @@ export default class Macro extends StrictMacro {
       $skill`Curse of Weaksauce`,
       $skill`Pocket Crumbs`,
       $skill`Micrometeorite`,
-      $item`train whistle`,
       $item`Time-Spinner`,
       $item`little red book`,
       $item`nasty-smelling moss`,
