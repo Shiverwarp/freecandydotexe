@@ -1,4 +1,5 @@
 import {
+  choiceFollowsFight,
   cliExecute,
   equip,
   equippedItem,
@@ -132,6 +133,7 @@ function trick(trickMacro: Macro) {
       visitUrl(`choice.php?whichchoice=804&option=3&whichhouse=${i}&pwd`);
       runCombat(trickMacro.toString());
       while (inMultiFight()) runCombat(trickMacro.toString());
+      if (choiceFollowsFight()) runChoice(-1);
       fillPantsgivingFullness();
       safeRestore();
       if (juneCleave()) block();
@@ -218,6 +220,7 @@ export function runBlocks(blocks = -1): void {
             .trySkill($skill`Trap Ghost`),
           () => get("questPAGhost") !== "unstarted",
           () => {
+            if (choiceFollowsFight()) runChoice(-1);
             fillPantsgivingFullness();
             safeRestore();
             juneCleave();
@@ -250,6 +253,7 @@ export function runBlocks(blocks = -1): void {
           digitizeMacro,
           () => getCounters("Digitize", -11, 0) !== "",
           () => {
+            if (choiceFollowsFight()) runChoice(-1);
             fillPantsgivingFullness();
             safeRestore();
             juneCleave();
@@ -265,6 +269,7 @@ export function runBlocks(blocks = -1): void {
           trickMacro,
           () => getKramcoWandererChance() >= 1,
           () => {
+            if (choiceFollowsFight()) runChoice(-1);
             fillPantsgivingFullness();
             safeRestore();
             juneCleave();
@@ -284,6 +289,7 @@ export function runBlocks(blocks = -1): void {
             trickMacro,
             () => totalTurnsPlayed() % 11 === 1 && get("_voteFreeFights") === currentVotes,
             () => {
+              if (choiceFollowsFight()) runChoice(-1);
               fillPantsgivingFullness();
               safeRestore();
               juneCleave();
@@ -316,6 +322,7 @@ export function runBlocks(blocks = -1): void {
         if (runSource.constraints?.familiar) useFamiliar(runSource.constraints.familiar());
         runSource.constraints.equipmentRequirements?.().maximize?.();
         advMacroAA($location`Noob Cave`, runSource.macro);
+        if (choiceFollowsFight()) runChoice(-1);
         fillPantsgivingFullness();
         safeRestore();
         juneCleave();
@@ -327,6 +334,7 @@ export function runBlocks(blocks = -1): void {
         fightOutfit("Digitize");
         advMacroAA(drunkSafeWander("wanderer"), trickMacro);
         () => {
+          if (choiceFollowsFight()) runChoice(-1);
           fillPantsgivingFullness();
           safeRestore();
           juneCleave();
