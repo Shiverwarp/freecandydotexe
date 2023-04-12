@@ -66,6 +66,7 @@ export function main(args: string): void {
       autoSatisfyWithMall: true,
       autoSatisfyWithNPCs: true,
       autoSatisfyWithStorage: true,
+      choiceAdventureScript: "choiceAdv.ash",
     });
     manager.setChoices({ 806: 1 });
 
