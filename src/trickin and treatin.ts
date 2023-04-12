@@ -321,7 +321,7 @@ export function runBlocks(blocks = -1): void {
         runSource.constraints.preparation?.();
         if (runSource.constraints?.familiar) useFamiliar(runSource.constraints.familiar());
         runSource.constraints.equipmentRequirements?.().maximize?.();
-        advMacroAA($location`Noob Cave`, runSource.macro);
+        advMacroAA(wanderWhere("backup"), runSource.macro);
         if (choiceFollowsFight()) runChoice(-1);
         fillPantsgivingFullness();
         safeRestore();
