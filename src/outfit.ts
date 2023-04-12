@@ -644,16 +644,6 @@ function sweatpants() {
 
   if (!needSweat) return new Map();
 
-  const VOA = get("valueOfAdventure");
-
-  const bestPerfectDrink =
-    $items`perfect cosmopolitan, perfect negroni, perfect dark and stormy, perfect mimosa, perfect old-fashioned, perfect paloma`
-      .map((item) => ({ item, price: mallPrice(item) }))
-      .reduce((a, b) => (a.price < b.price ? a : b)).item;
-  const perfectDrinkValuePerDrunk =
-    ((getAverageAdventures(bestPerfectDrink) + 3) * VOA - mallPrice(bestPerfectDrink)) / 3;
-  const splendidMartiniValuePerDrunk = (getAverageAdventures($item`splendid martini`) + 2) * VOA;
-
-  const bonus = (Math.max(perfectDrinkValuePerDrunk, splendidMartiniValuePerDrunk) * 2) / 25;
+  const bonus = 1000;
   return new Map([[$item`designer sweatpants`, bonus]]);
 }
