@@ -182,10 +182,7 @@ export function runBlocks(blocks = -1): void {
         .externalIf(SourceTerminal.isCurrentSkill($skill`Extract`), Macro.skill($skill`Extract`))
         .kill();
 
-  const gooseDupeMacro = Macro.trySkill($skill`Pocket Crumbs`)
-    .item([$item`HOA citation pad`, $item`porquoise-handled sixgun`])
-    .item([$item`train whistle`, $item`Rain-Doh indigo cup`])
-    .trySkill($skill`Emit Matter Duplicating Drones`)
+  const gooseDupeMacro = Macro.trySkill($skill`Emit Matter Duplicating Drones`)
     .stasis()
     .kill();
 
