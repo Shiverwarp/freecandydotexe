@@ -364,13 +364,8 @@ function pantsgiving(): Map<Item, number> {
   const turns = turnArray[index] || 50000;
 
   if (turns - count > myAdventures()) return new Map<Item, number>();
-  const foodPick = getPantsgivingFood();
-  const fullnessValue =
-    overallAdventureValue() *
-      (getAverageAdventures(foodPick.food) + 1 + (get("_fudgeSporkUsed") ? 3 : 0)) -
-    (foodPick.costOverride?.() ?? mallPrice(foodPick.food)) -
-    mallPrice($item`Special Seasoning`) -
-    (get("_fudgeSporkUsed") ? mallPrice($item`fudge spork`) : 0);
+  // 13 adventures per limbos usually.
+  const fullnessValue = 13 * get("valueOfAdventure");
   const pantsgivingBonus = fullnessValue / (turns * 0.9);
   return new Map<Item, number>([[$item`Pantsgiving`, pantsgivingBonus]]);
 }
