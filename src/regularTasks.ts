@@ -141,9 +141,13 @@ const GLOBAL_TASKS: CandyTask[] = [
     do: () => cliExecute("numberology 69"),
   },
   {
+    //This will just be our general diet.
     name: "Fill Pantsgiving Fullness",
     ready: () =>
-      !$classes`Vampyre, Grey Goo`.includes(myClass()) && myFullness() + 1 === fullnessLimit(),
+      !$classes`Vampyre, Grey Goo`.includes(myClass()) &&
+      (myFullness() < fullnessLimit() || myInebriety() < inebrietyLimit()) &&
+      (getWorkshed() === $item`portable Mayo Clinic` ||
+        (getWorkshed() !== $item`portable Mayo Clinic` && get("_workshedItemUsed"))),
     completed: () => myFullness() >= fullnessLimit(),
     do: (): void => {
       cliExecute("2crsDiet.ash");
