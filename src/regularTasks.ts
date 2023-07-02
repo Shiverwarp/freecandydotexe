@@ -96,6 +96,11 @@ const GLOBAL_TASKS: CandyTask[] = [
     },
   })),
   {
+    name: "Set Choice Adventure Script",
+    completed: () => get("choiceAdventureScript") === "choiceAdv.ash",
+    do: () => set("choiceAdventureScript", "choiceAdv.ash"),
+  },
+  {
     name: "Acquire Kgnee",
     ready: () =>
       have($familiar`Reagnimated Gnome`) &&
