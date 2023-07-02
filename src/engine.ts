@@ -1,5 +1,6 @@
 import { Engine, Outfit } from "grimoire-kolmafia";
 import {
+  choiceFollowsFight,
   equip,
   inebrietyLimit,
   itemAmount,
@@ -8,6 +9,7 @@ import {
   myMaxmp,
   restoreHp,
   restoreMp,
+  runChoice,
   useFamiliar,
   visitUrl,
   xpath,
@@ -62,6 +64,14 @@ export default class CandyEngine extends Engine<never, CandyTask> {
 
     if (itemAmount($item`tiny stillsuit`)) {
       equip($familiar`Mosquito`, $item`tiny stillsuit`);
+    }
+  }
+
+  post(task: CandyTask): void {
+    super.post(task);
+
+    if ("combat" in task) {
+      if (choiceFollowsFight()) runChoice(-1);
     }
   }
 
