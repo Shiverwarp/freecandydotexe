@@ -100,6 +100,18 @@ function snowSuit() {
   return new Map<Item, number>([[$item`Snow Suit`, getSaleValue($item`carrot nose`) / 10]]);
 }
 
+function lilDocBag() {
+  if (!have($item`Lil' Doctor™ bag`)) {
+    return new Map<Item, number>([]);
+  }
+
+  if (get("questDoctorBag") === "unstarted") {
+    return new Map<Item, number>([[$item`Lil' Doctor™ bag`, 220]]);
+  } else {
+    return new Map<Item, number>([]);
+  }
+}
+
 function mayflowerBouquet() {
   // +40% meat drop 12.5% of the time (effectively 5%)
   // Drops flowers 50% of the time, wiki says 5-10 a day.
@@ -167,6 +179,7 @@ function easyBonuses() {
     ...mayflowerBouquet(),
     ...sweatpants(),
     ...pantogram(),
+    ...lilDocBag(),
   ]);
 }
 

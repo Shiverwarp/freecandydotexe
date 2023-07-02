@@ -15,6 +15,7 @@ import { lovebugsFactory } from "./lovebugs";
 import { yellowRayFactory } from "./yellowray";
 import CandyEngine from "../engine";
 import { printHighlight } from "../lib";
+import { docBagFactory } from "./docbag";
 
 export type { DraggableFight };
 
