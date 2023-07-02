@@ -1,12 +1,14 @@
 import {
   abort,
   adv1,
+  availableAmount,
   cliExecute,
   eat,
   fullnessLimit,
   getWorkshed,
   inebrietyLimit,
   Location,
+  myAdventures,
   myClass,
   myFullness,
   myHp,
@@ -15,6 +17,7 @@ import {
   reverseNumberology,
   runChoice,
   totalTurnsPlayed,
+  use,
   useSkill,
   visitUrl,
 } from "kolmafia";
@@ -177,6 +180,20 @@ const GLOBAL_TASKS: CandyTask[] = [
     ready: () => TrainSet.installed(),
     completed: () => !willRotateTrainset(),
     do: rotateTrainToOptimalCycle,
+  },
+  {
+    name: "Swap Workshed to Mayo",
+    ready: () =>
+      (availableAmount($item`portable Mayo Clinic`) > 0 && get("_coldMedicineConsults") >= 5) ||
+      myAdventures() < 10,
+    completed: () => get("_workshedItemUsed"),
+    do: () => use($item`portable Mayo Clinic`),
+  },
+  {
+    name: "Swap Workshed to Cold Medicine Cabinet",
+    ready: () => availableAmount($item`cold medicine cabinet`) > 0 && myAdventures() <= 85,
+    completed: () => get("_workshedItemUsed"),
+    do: () => use($item`cold medicine cabinet`),
   },
   {
     name: "Tune Snapper",
