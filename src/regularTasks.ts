@@ -191,7 +191,10 @@ const GLOBAL_TASKS: CandyTask[] = [
   },
   {
     name: "Swap Workshed to Cold Medicine Cabinet",
-    ready: () => availableAmount($item`cold medicine cabinet`) > 0 && myAdventures() <= 85,
+    ready: () =>
+      availableAmount($item`cold medicine cabinet`) > 0 &&
+      getWorkshed() === $item`portable Mayo Clinic` &&
+      myAdventures() <= 85,
     completed: () => get("_workshedItemUsed"),
     do: () => use($item`cold medicine cabinet`),
   },
