@@ -446,29 +446,19 @@ export function trickOutfit(): Outfit {
 }
 
 export function digitizeOutfit(): Outfit {
-  if (get("_sourceTerminalDigitizeMonster") === $monster`Knob Goblin Embezzler`) {
-    const outfit = new Outfit();
-    const meatFamiliar = maxBy(
-      Familiar.all().filter((f) => have(f)),
-      findLeprechaunMultiplier
-    );
-    outfit.equip(meatFamiliar);
+  const outfit = new Outfit();
+  outfit.equip($familiar`Grey Goose`);
 
-    if (have($item`Buddy Bjorn`)) {
-      outfit.equip($item`Buddy Bjorn`);
-      outfit.bjornify(chooseRider().familiar);
-    } else if (have($item`Crown of Thrones`)) {
-      outfit.equip($item`Crown of Thrones`);
-      outfit.enthrone(chooseRider().familiar);
-    }
-
-    const baseMeat = 1000 + (SongBoom.song() === "Total Eclipse of Your Meat" ? 25 : 0);
-    outfit.modifier.push(`${baseMeat / 100} Meat Drop`);
-    outfit.modifier.push("0.72 Item Drop");
-
-    outfit.bonuses = fullBonuses();
-    return outfit;
+  if (have($item`Buddy Bjorn`)) {
+    outfit.equip($item`Buddy Bjorn`);
+    outfit.bjornify(chooseRider().familiar);
+  } else if (have($item`Crown of Thrones`)) {
+    outfit.equip($item`Crown of Thrones`);
+    outfit.enthrone(chooseRider().familiar);
   }
 
-  return combatOutfit();
+  outfit.modifier.push("2000 Familiar Experience 11 max");
+
+  outfit.bonuses = fullBonuses();
+  return outfit;
 }
