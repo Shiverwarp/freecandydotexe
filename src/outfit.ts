@@ -132,7 +132,7 @@ function mayflowerBouquet() {
 function sweatpants() {
   if (!have($item`designer sweatpants`)) return new Map();
 
-  const needSweat = get("sweat") < 25 * (3 - get("_sweatOutSomeBoozeUsed"));
+  const needSweat = get("sweat", 0) < 100;
 
   if (!needSweat) return new Map();
 
