@@ -153,6 +153,7 @@ function reallyEasyBonuses() {
         [$item`lucky gold ring`, 400],
         [$item`Mr. Cheeng's spectacles`, 250],
         [$item`Mr. Screege's spectacles`, 180],
+        [$item`KoL Con 13 snowglobe`, 180],
       ] as [Item, number][]
     ).filter(([item]) => have(item))
   );
