@@ -1,12 +1,11 @@
 import { inebrietyLimit, Location, myInebriety } from "kolmafia";
-import { $location } from "libram";
-import { manager, printHighlight } from "../lib";
-import { docBagFactory } from "./docbag";
+import { $location, maxBy } from "libram";
 import { guzzlrFactory } from "./guzzlr";
 import {
   canAdventureOrUnlock,
+  canWander,
   defaultFactory,
-  maxBy,
+  DraggableFight,
   unlock,
   unsupportedChoices,
   WandererFactory,
@@ -14,8 +13,10 @@ import {
 } from "./lib";
 import { lovebugsFactory } from "./lovebugs";
 import { yellowRayFactory } from "./yellowray";
+import CandyEngine from "../engine";
+import { printHighlight } from "../lib";
 
-export type DraggableFight = "backup" | "wanderer" | "yellow ray";
+export type { DraggableFight };
 
 const wanderFactories: WandererFactory[] = [
   defaultFactory,
@@ -37,7 +38,8 @@ export function bestWander(
     for (const wanderTarget of wanderTargets) {
       if (
         !nameSkiplist.includes(wanderTarget.name) &&
-        !locationSkiplist.includes(wanderTarget.location)
+        !locationSkiplist.includes(wanderTarget.location) &&
+        canWander(wanderTarget.location, type)
       ) {
         const wandererLocation: WandererLocation = possibleLocations.get(wanderTarget.location) ?? {
           location: wanderTarget.location,
@@ -74,7 +76,9 @@ export function wanderWhere(
   const failed = candidate.targets.filter((target) => !target.prepareTurn());
 
   const badLocation =
-    !canAdventureOrUnlock(candidate.location) || !unlock(candidate.location, candidate.value)
+    !canAdventureOrUnlock(candidate.location) ||
+    !unlock(candidate.location, candidate.value) ||
+    !canWander(candidate.location, type)
       ? [candidate.location]
       : [];
 
@@ -85,7 +89,7 @@ export function wanderWhere(
       [...locationSkiplist, ...badLocation]
     );
   } else {
-    manager.setChoices(unsupportedChoices.get(candidate.location) ?? {});
+    CandyEngine.propertyManager.setChoices(unsupportedChoices.get(candidate.location) ?? {});
     const targets = candidate.targets.map((t) => t.name).join("; ");
     const value = candidate.value.toFixed(2);
     printHighlight(`Wandering at ${candidate.location} for expected value ${value} (${targets})`);
