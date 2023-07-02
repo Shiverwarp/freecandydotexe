@@ -161,7 +161,7 @@ export function canGorge(): boolean {
 function fillPantsgivingFullness(): void {
   if (!canGorge()) return;
   if (getWorkshed() === $item`portable Mayo Clinic`) {
-    cliExecute("2crsHalloweenDiet.ash");
+    cliExecute("2crsDiet.ash");
   }
 }
 
