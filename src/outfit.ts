@@ -148,7 +148,7 @@ function sweatpants() {
   const splendidMartiniValuePerDrunk =
     (getAverageAdventures($item`splendid martini`) + 2) * VOA - mallPrice($item`splendid martini`);
 
-  const bonus = (Math.max(perfectDrinkValuePerDrunk, splendidMartiniValuePerDrunk) * 2) / 25;
+  const bonus = 5000;
   return new Map([[$item`designer sweatpants`, bonus]]);
 }
 
