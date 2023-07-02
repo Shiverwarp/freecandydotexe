@@ -222,8 +222,13 @@ const GLOBAL_TASKS: CandyTask[] = [
     name: "Digitize Wanderer",
     completed: () => Counter.get("Digitize") > 0,
     do: () => drunkSafeWander("wanderer"),
-    prepare: () =>
-      shouldRedigitize() && SourceTerminal.educate([$skill`Digitize`, $skill`Extract`]),
+    prepare: (): void => {
+      if (shouldRedigitize()) {
+        SourceTerminal.educate([$skill`Digitize`, $skill`Extract`]);
+      }
+      cliExecute("tcrsgain familiar experience 5 eff");
+      cliExecute("tcrsgain 900 item 7 eff");
+    },
     post: () => get("_sourceTerminalDigitizeMonsterCount") || (_digitizeInitialized = false),
     outfit: digitizeOutfit,
     combat: new CandyStrategy(() => Macro.redigitize().default()),
