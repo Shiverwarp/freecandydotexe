@@ -150,7 +150,7 @@ const GLOBAL_TASKS: CandyTask[] = [
   },
   {
     //This will just be our general diet.
-    name: "Fill Pantsgiving Fullness",
+    name: "Diet",
     ready: () =>
       !$classes`Vampyre, Grey Goo`.includes(myClass()) &&
       (myFullness() < fullnessLimit() || myInebriety() < inebrietyLimit()) &&
