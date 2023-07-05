@@ -154,11 +154,12 @@ const GLOBAL_TASKS: CandyTask[] = [
     ready: () =>
       !$classes`Vampyre, Grey Goo`.includes(myClass()) &&
       (myFullness() < fullnessLimit() || myInebriety() < inebrietyLimit()) &&
+      get("ghostPepperTurnsLeft") <= 0 &&
       (getWorkshed() === $item`portable Mayo Clinic` ||
         (getWorkshed() !== $item`portable Mayo Clinic` && get("_workshedItemUsed"))),
     completed: () => myFullness() >= fullnessLimit(),
     do: (): void => {
-      cliExecute("2crsDiet.ash");
+      cliExecute("2crsDietPeppers.ash");
     },
   },
   {
