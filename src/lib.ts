@@ -24,12 +24,7 @@ export function safeRestore(): void {
   }
   const mpTarget = Math.min(myMaxmp(), 200);
   if (myMp() < mpTarget) {
-    if (
-      (have($item`magical sausage`) || have($item`magical sausage casing`)) &&
-      get("_sausagesEaten") < 23
-    ) {
-      eat($item`magical sausage`);
-    } else restoreMp(mpTarget);
+    restoreMp(mpTarget);
   }
 }
 
