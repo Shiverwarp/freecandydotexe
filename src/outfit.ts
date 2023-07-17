@@ -485,14 +485,14 @@ export function digitizeOutfit(): Outfit {
   const outfit = new Outfit();
   outfit.equip($familiar`Grey Goose`);
 
-    const bjornChoice = ensureBjorn(leprechaunCoefficient, baseMeat / 100);
-    if (have($item`Buddy Bjorn`)) {
-      outfit.equip($item`Buddy Bjorn`);
-      outfit.bjornify(bjornChoice.familiar);
-    } else if (have($item`Crown of Thrones`)) {
-      outfit.equip($item`Crown of Thrones`);
-      outfit.enthrone(bjornChoice.familiar);
-    }
+  const bjornChoice = ensureBjorn(0);
+  if (have($item`Buddy Bjorn`)) {
+    outfit.equip($item`Buddy Bjorn`);
+    outfit.bjornify(bjornChoice.familiar);
+  } else if (have($item`Crown of Thrones`)) {
+    outfit.equip($item`Crown of Thrones`);
+    outfit.enthrone(bjornChoice.familiar);
+  }
 
   outfit.modifier.push("2000 Familiar Experience 11 max");
 
