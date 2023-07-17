@@ -83,6 +83,7 @@ export class Macro extends StrictMacro {
     return this.try([
       $skill`Curse of Weaksauce`,
       $skill`Pocket Crumbs`,
+      $item`Rain-Doh indigo cup`,
       $skill`Micrometeorite`,
       $item`train whistle`,
       $item`Time-Spinner`,
@@ -91,7 +92,6 @@ export class Macro extends StrictMacro {
       $item`HOA citation pad`,
       $item`Great Wolf's lice`,
       $item`Mayor Ghost's scissors`,
-      $item`Rain-Doh indigo cup`,
       $item`porquoise-handled sixgun`,
       $skill`Summon Love Gnats`,
       $skill`Bowl Straight Up`,

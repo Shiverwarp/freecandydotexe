@@ -4,6 +4,7 @@ import {
   equip,
   inebrietyLimit,
   itemAmount,
+  myHp,
   myInebriety,
   myMaxhp,
   myMaxmp,
@@ -79,8 +80,9 @@ export default class CandyEngine extends Engine<never, CandyTask> {
     super.prepare(task);
 
     if ("combat" in task) {
-      const hpTarget = clamp(0.4 * myMaxhp(), 200, 2000);
-      restoreHp(hpTarget);
+      if (myHp() < myMaxhp() * 0.5) {
+        restoreHp(myMaxhp() * 0.9);
+      }
       const mpTarget = Math.min(150, myMaxmp());
       restoreMp(mpTarget);
     }
