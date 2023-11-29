@@ -1,4 +1,4 @@
-import { trickOutfit } from "./outfit";
+import { combatOutfit, trickOutfit } from "./outfit";
 import { CandyTask } from "./lib";
 import { CandyStrategy } from "./combat";
 import { $effect, $item, $location, get, have } from "libram";
@@ -26,8 +26,7 @@ const TRICK_TREAT_TASKS: CandyTask[] = [
         numericModifier("Familiar Experience") < 10
       ) {
         print("Trying to recalculate outfit...", "yellow");
-        cliExecute("outfit birthday suit");
-        trickOutfit().dress();
+        combatOutfit(true, true).dress();
       }
       if (
         (get("gooseDronesRemaining") < 10 && numericModifier("Familiar Experience") < 23) ||

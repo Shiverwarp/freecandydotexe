@@ -116,7 +116,7 @@ function makeWandererTask(
     choices: () => wanderer().getChoices(options),
     combat: new CandyStrategy(),
     outfit: () =>
-      combatOutfit(false, { equip: wanderer().getEquipment(options).concat(equip), modes }),
+      combatOutfit(false, false, { equip: wanderer().getEquipment(options).concat(equip), modes }),
     ...base,
   };
 }
@@ -274,7 +274,7 @@ const GLOBAL_TASKS: CandyTask[] = [
     completed: () => get("questPAGhost") === "unstarted",
     ready: () => have($item`protonic accelerator pack`) && !!get("ghostLocation"),
     do: () => get("ghostLocation") ?? abort("Failed to find proper ghost location"),
-    outfit: () => combatOutfit(false, { back: $item`protonic accelerator pack` }),
+    outfit: () => combatOutfit(false, false, { back: $item`protonic accelerator pack` }),
     combat: new CandyStrategy(() =>
       Macro.trySkill($skill`Shoot Ghost`)
         .trySkill($skill`Shoot Ghost`)
@@ -394,7 +394,7 @@ const GLOBAL_TASKS: CandyTask[] = [
           if (!outfit.equip(item)) abort(`Failed to equip item ${item} for free running`);
         }
       }
-      return combatOutfit(false, outfit.spec());
+      return combatOutfit(false, false, outfit.spec());
     },
     combat: new CandyStrategy(() => Macro.step(getRunSource()?.macro ?? Macro.abort())),
     sobriety: "sober",

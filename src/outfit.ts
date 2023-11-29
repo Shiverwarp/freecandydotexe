@@ -382,7 +382,7 @@ const actionRateBonus = () =>
     ? 1
     : 0);
 
-export function combatOutfit(towerCombat = false, base: OutfitSpec = {}): Outfit {
+export function combatOutfit(towerCombat = false, recalc = false, base: OutfitSpec = {}): Outfit {
   const outfit = Outfit.from(
     base,
     new Error(`Failed to construct outfit from spec ${toJson(base)}`)
@@ -437,7 +437,11 @@ export function combatOutfit(towerCombat = false, base: OutfitSpec = {}): Outfit
   } else {
     outfit.modifier.push("0.2 Meat Drop");
   }
-  outfit.modifier.push("28 Item Drop 501 max");
+  if (recalc) {
+    outfit.modifier.push("28 Item Drop 500 max");
+  } else {
+    outfit.modifier.push("28 Item Drop 501 max");
+  }
 
   const bjornChoice = ensureBjorn(weightValue);
   if (have($item`Buddy Bjorn`)) {
