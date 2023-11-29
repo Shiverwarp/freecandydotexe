@@ -14,7 +14,7 @@ const TRICK_TREAT_TASKS: CandyTask[] = [
         const taffyNeeded = Math.ceil(swayedTurnsNeeded / 10);
         use(taffyNeeded, $item`pulled blue taffy`);
       }
-      if (numericModifier("Item Drop") < 234) {
+      if (numericModifier("Item Drop") < 400) {
         cliExecute("tcrsgain 400 item 28 eff");
       }
       if (get("gooseDronesRemaining") < 10 && numericModifier("Familiar Experience") < 23) {
