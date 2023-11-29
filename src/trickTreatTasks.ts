@@ -6,7 +6,7 @@ import { abort, cliExecute, haveEffect, myAdventures, numericModifier, use } fro
 
 const TRICK_TREAT_TASKS: CandyTask[] = [
   {
-    name: "Trick",
+    name: "Farm Solenoids",
     completed: () => myAdventures() === 0,
     prepare: (): void => {
       if (!have($effect`Blue Swayed`, 51)) {
