@@ -438,9 +438,9 @@ export function combatOutfit(towerCombat = false, recalc = false, base: OutfitSp
     outfit.modifier.push("0.2 Meat Drop");
   }
   if (recalc) {
-    outfit.modifier.push("28 Item Drop 500 max");
-  } else {
     outfit.modifier.push("28 Item Drop 501 max");
+  } else {
+    outfit.modifier.push("28 Item Drop 500 max");
   }
 
   const bjornChoice = ensureBjorn(weightValue);
