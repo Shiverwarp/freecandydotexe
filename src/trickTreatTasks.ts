@@ -15,7 +15,7 @@ const TRICK_TREAT_TASKS: CandyTask[] = [
         use(taffyNeeded, $item`pulled blue taffy`);
       }
       if (numericModifier("Item Drop") < 400) {
-        cliExecute("tcrsgain 400 item 28 eff");
+        cliExecute("tcrsgain 401 item 28 eff");
       }
       if (get("gooseDronesRemaining") < 10 && numericModifier("Familiar Experience") < 23) {
         cliExecute("tcrsgain 23 familiar experience 100 eff");
