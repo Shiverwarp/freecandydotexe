@@ -456,16 +456,6 @@ export function combatOutfit(towerCombat = false, base: OutfitSpec = {}): Outfit
 }
 
 export function trickOutfit(): Outfit {
-  if (args.trickOutfit) {
-    const outfit = new Outfit();
-    outfit.equip(args.familiar);
-    for (const piece of outfitPieces(args.trickOutfit)) {
-      if (!outfit.equip(piece)) {
-        abort(`Failed to equip ${piece} from trick outfit ${args.trickOutfit}`);
-      }
-    }
-    return outfit;
-  }
   return combatOutfit(true);
 }
 
