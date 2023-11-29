@@ -28,6 +28,7 @@ const TRICK_TREAT_TASKS: CandyTask[] = [
     do: $location`Spring Bros. Solenoids`,
     outfit: trickOutfit,
     combat: new CandyStrategy(),
+    choices: { 1514: 3 }, //Skip
   },
 ];
 
