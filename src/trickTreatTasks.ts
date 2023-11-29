@@ -20,7 +20,11 @@ const TRICK_TREAT_TASKS: CandyTask[] = [
       if (get("gooseDronesRemaining") < 10 && numericModifier("Familiar Experience") < 23) {
         cliExecute("tcrsgain 23 familiar experience 100 eff");
       }
-      if (numericModifier("Familiar Experience") < 23 || numericModifier("Item Drop") < 400) {
+      if (
+        (get("gooseDronesRemaining") < 10 && numericModifier("Familiar Experience") < 23) ||
+        numericModifier("Item Drop") < 400 ||
+        numericModifier("Familiar Experience") < 10
+      ) {
         abort("We couldn't cap our familiar exp and item drop!");
       }
     },
