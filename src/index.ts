@@ -36,6 +36,9 @@ export default function main(argstring = ""): void {
   // Allow re-running after losing a combat
   set("_lastCombatLost", false);
 
+  //Set mood
+  set("currentMood", "nepfarm");
+
   const quest: Quest<CandyTask> = {
     name: "hacking your system",
     completed: () => noMoreAdventures() || doneWithNemesis(),
