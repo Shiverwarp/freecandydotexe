@@ -192,11 +192,9 @@ function reallyEasyBonuses() {
         [$item`lucky gold ring`, 400],
         [$item`Mr. Cheeng's spectacles`, 250],
         [$item`Mr. Screege's spectacles`, 180],
-        [$item`KoL Con 13 snowglobe`, sneegleebDropValue()],
-        [$item`can of mixed everything`, sneegleebDropValue() / 2],
+        [$item`KoL Con 13 snowglobe`, 600],
+        [$item`can of mixed everything`, 300],
         [$item`tiny stillsuit`, 69],
-        [$item`Time Cloak`, 900],
-        [$item`time-twitching toolbelt`, 900],
       ] as [Item, number][]
     ).filter(([item]) => have(item))
   );
