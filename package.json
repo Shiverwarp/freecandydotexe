@@ -1,8 +1,8 @@
 {
-  "name": "freecandydotexe",
+  "name": "noido",
   "version": "1.0.0",
   "description": "A trick-or-treating script for the 2003 browser-based RPG Kingdom of Loathing.",
-  "main": "KoLmafia/scripts/freecandydotexe/freecandy.js",
+  "main": "KoLmafia/scripts/freecandydotexe/noido.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "node build.mjs",
@@ -26,7 +26,7 @@
     "esbuild-plugin-babel": "0.2.3",
     "eslint": "^7.28.0",
     "eslint-config-prettier": "^8.3.0",
-    "eslint-plugin-libram": "^0.3.3",
+    "eslint-plugin-libram": "^0.3.4",
     "prettier": "^2.3.1",
     "typescript": "^4.5.2"
   },
@@ -34,8 +34,8 @@
     "core-js": "^3.16.4",
     "garbo-lib": "^0.0.1",
     "grimoire-kolmafia": "^0.3.23",
-    "kolmafia": "^5.27651.0",
-    "libram": "^0.8.14"
+    "kolmafia": "^5.27701.0",
+    "libram": "^0.8.17"
   },
   "author": "loathers",
   "license": "ISC",

@@ -1,7 +1,7 @@
 import { Args, getTasks, Quest } from "grimoire-kolmafia";
 import args from "./args";
 import { questStep, set } from "libram";
-import { CandyTask, State } from "./lib";
+import { CandyTask } from "./lib";
 import CandyEngine from "./engine";
 import GLOBAL_TASKS from "./regularTasks";
 import TRICK_TREAT_TASKS from "./trickTreatTasks";
@@ -33,20 +33,12 @@ export default function main(argstring = ""): void {
     return false;
   };
 
-  const doneWithBlocks = () => {
-    if (State.blocks >= args.blocks) {
-      print(`Finished ${args.blocks} blocks!`, "red");
-      return true;
-    }
-    return false;
-  };
-
   // Allow re-running after losing a combat
   set("_lastCombatLost", false);
 
   const quest: Quest<CandyTask> = {
     name: "hacking your system",
-    completed: () => noMoreAdventures() || doneWithNemesis() || doneWithBlocks(),
+    completed: () => noMoreAdventures() || doneWithNemesis(),
     tasks: [...GLOBAL_TASKS, ...TRICK_TREAT_TASKS],
   };
 

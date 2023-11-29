@@ -2,17 +2,14 @@ import {
   $familiars,
   $item,
   $items,
-  $location,
-  $monster,
   $skill,
   $skills,
   Delayed,
-  get,
   have,
   SourceTerminal,
   StrictMacro,
 } from "libram";
-import { getMonsters, Item, Skill } from "kolmafia";
+import { Item, Skill } from "kolmafia";
 import { CombatStrategy } from "grimoire-kolmafia";
 import { shouldRedigitize } from "./lib";
 import args from "./args";
@@ -116,26 +113,18 @@ export class Macro extends StrictMacro {
   }
 
   default(): Macro {
-    return this.if_($monster`All-Hallow's Steve`, Macro.abort())
-      .externalIf(
-        $familiars`Stocking Mimic, Ninja Pirate Zombie Robot, Comma Chameleon, Feather Boa Constrictor, Cocoabo`.includes(
-          args.familiar
-        ),
-        Macro.stasis(),
-        Macro.try([
-          ...$skills`Curse of Weaksauce, Micrometeorite, Sing Along, Bowl Straight Up`,
-          ...$items`porquoise-handled sixgun, Rain-Doh indigo cup`,
-        ])
-          .externalIf(SourceTerminal.isCurrentSkill($skill`Extract`), Macro.skill($skill`Extract`))
-          .externalIf(
-            have($skill`Just the Facts`) && get("_circadianRhythmsRecalled"),
-            Macro.if_(
-              getMonsters($location`Trick-or-Treating`),
-              Macro.trySkill($skill`Recall Facts: %phylum Circadian Rhythms`)
-            )
-          )
-      )
-      .kill();
+    return this.externalIf(
+      $familiars`Stocking Mimic, Ninja Pirate Zombie Robot, Comma Chameleon, Feather Boa Constrictor, Cocoabo`.includes(
+        args.familiar
+      ),
+      Macro.stasis(),
+      Macro.try([
+        ...$skills`Curse of Weaksauce, Micrometeorite, Sing Along, Bowl Straight Up`,
+        ...$items`porquoise-handled sixgun, Rain-Doh indigo cup`,
+      ])
+        .skill($skill`Emit Matter Duplicating Drones`)
+        .externalIf(SourceTerminal.isCurrentSkill($skill`Extract`), Macro.skill($skill`Extract`))
+    ).kill();
   }
 
   static default(): Macro {

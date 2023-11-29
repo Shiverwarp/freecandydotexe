@@ -1,7 +1,6 @@
 import { Outfit, OutfitSpec } from "grimoire-kolmafia";
 import {
   abort,
-  buy,
   canEquip,
   effectModifier,
   equippedItem,
@@ -25,7 +24,6 @@ import {
   toJson,
   toSlot,
   totalTurnsPlayed,
-  userConfirm,
 } from "kolmafia";
 import args from "./args";
 import {
@@ -197,6 +195,19 @@ function reallyEasyBonuses() {
         [$item`KoL Con 13 snowglobe`, sneegleebDropValue()],
         [$item`can of mixed everything`, sneegleebDropValue() / 2],
         [$item`tiny stillsuit`, 69],
+        [$item`Time Cloak`, 900],
+        [$item`time-twitching toolbelt`, 900],
+      ] as [Item, number][]
+    ).filter(([item]) => have(item))
+  );
+}
+
+function towerOnlyBonuses() {
+  return new Map<Item, number>(
+    (
+      [
+        [$item`Time Cloak`, 900],
+        [$item`time-twitching toolbelt`, 900],
       ] as [Item, number][]
     ).filter(([item]) => have(item))
   );
@@ -328,7 +339,10 @@ function pantsgiving(): Map<Item, number> {
   return new Map<Item, number>([[$item`Pantsgiving`, pantsgivingBonus]]);
 }
 
-function fullBonuses() {
+function fullBonuses(towerCombat = false) {
+  if (towerCombat) {
+    return new Map([...easyBonuses(), ...pantsgiving(), ...towerOnlyBonuses()]);
+  }
   return new Map([...easyBonuses(), ...pantsgiving()]);
 }
 
@@ -368,7 +382,7 @@ const actionRateBonus = () =>
     ? 1
     : 0);
 
-export function combatOutfit(base: OutfitSpec = {}): Outfit {
+export function combatOutfit(towerCombat = false, base: OutfitSpec = {}): Outfit {
   const outfit = Outfit.from(
     base,
     new Error(`Failed to construct outfit from spec ${toJson(base)}`)
@@ -393,6 +407,9 @@ export function combatOutfit(base: OutfitSpec = {}): Outfit {
       "It looks like we're about to go adventuring without a familiar, and that feels deeply wrong"
     );
   }
+
+  outfit.modifier.push("10000 Familiar Experience 23 max");
+
   if (adventureFamiliars.includes(outfit.familiar)) {
     weightValue = Math.round(MAGIC_NUMBER * baseAdventureValue() * 100) / 100;
   } else {
@@ -414,7 +431,7 @@ export function combatOutfit(base: OutfitSpec = {}): Outfit {
     } else if (SongBoom.song() === "Total Eclipse of Your Meat") {
       outfit.modifier.push("0.25 Meat Drop");
     } else {
-      outfit.modifier.push("0.01 Item Drop");
+      outfit.modifier.push("48 Item Drop 334 max");
     }
   }
 
@@ -432,14 +449,11 @@ export function combatOutfit(base: OutfitSpec = {}): Outfit {
     outfit.enthrone(bjornChoice.familiar);
   }
 
-  outfit.setBonuses(fullBonuses());
+  outfit.setBonuses(fullBonuses(towerCombat));
 
   return outfit;
 }
 
-let askedAboutTwoPiece = false;
-const trickHats = $items`invisible bag, witch hat, beholed bedsheet, wolfman mask, pumpkinhead mask, mummy costume`;
-const twoPieces = ["Eldritch Equipage", "Bugbear Costume", "Filthy Hippy Disguise"];
 export function trickOutfit(): Outfit {
   if (args.trickOutfit) {
     const outfit = new Outfit();
@@ -451,37 +465,7 @@ export function trickOutfit(): Outfit {
     }
     return outfit;
   }
-
-  if (!trickHats.some((hat) => have(hat))) {
-    buy(1, maxBy(trickHats, mallPrice, true));
-  }
-  const trickHat = trickHats.find((i) => have(i));
-  if (!trickHat) {
-    const twoPiece = twoPieces.find((outfit) =>
-      outfitPieces(outfit).every((i) => have(i) && canEquip(i))
-    );
-    if (!twoPiece) {
-      abort("Unable to find a good 1-piece or 2-piece outfit for trick-or-treating");
-    }
-    if (
-      !askedAboutTwoPiece &&
-      !userConfirm(
-        "We don't have access to a one-piece outfit, but we did find a two-piece outfit. Is that alright?"
-      )
-    ) {
-      printError("We cannot create a good trick outfit, and must give up.");
-      abort();
-    } else {
-      askedAboutTwoPiece = true;
-    }
-    const outfit = new Outfit();
-    for (const piece of outfitPieces(twoPiece)) {
-      if (!outfit.equip(piece)) abort(`Unable to equip ${piece} from ${twoPiece}!`);
-    }
-    return combatOutfit(outfit.spec());
-  }
-
-  return combatOutfit({ hat: trickHat });
+  return combatOutfit(true);
 }
 
 export function digitizeOutfit(): Outfit {

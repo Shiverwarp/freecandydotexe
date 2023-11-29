@@ -8,13 +8,11 @@ import {
   myMaxmp,
   restoreHp,
   restoreMp,
-  useFamiliar,
   visitUrl,
   xpath,
 } from "kolmafia";
-import { CandyTask, printHighlight, State } from "./lib";
+import { CandyTask } from "./lib";
 import { $familiar, $item, clamp, Session } from "libram";
-import args from "./args";
 
 export default class CandyEngine extends Engine<never, CandyTask> {
   session: Session;
@@ -30,20 +28,6 @@ export default class CandyEngine extends Engine<never, CandyTask> {
         ? 1
         : 0;
     this.session = Session.current();
-  }
-
-  destruct(): void {
-    super.destruct();
-    visitUrl(
-      `account.php?actions[]=flag_aabosses&flag_aabosses=${this.aaBossFlag}&action=Update`,
-      true
-    );
-    useFamiliar(args.familiar);
-
-    printHighlight(`freecandy has run ${State.blocks} blocks, and produced the following items:`);
-    for (const [item, quantity] of Session.current().diff(this.session).items) {
-      printHighlight(` ${item}: ${quantity}`);
-    }
   }
 
   available(task: CandyTask): boolean {

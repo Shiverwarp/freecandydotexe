@@ -1,5 +1,5 @@
 import { Args } from "grimoire-kolmafia";
-import { myFamiliar } from "kolmafia";
+import { $familiar } from "libram";
 
 const args = Args.create(
   "freecandydotexe",
@@ -22,7 +22,7 @@ const args = Args.create(
     familiar: Args.familiar({
       help: "The familiar to use for combats",
       setting: "freecandy_familiar",
-      default: myFamiliar(),
+      default: $familiar`Grey Goose`,
     }),
   },
   { positionalArgs: ["blocks"] }
