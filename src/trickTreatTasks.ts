@@ -29,7 +29,7 @@ const TRICK_TREAT_TASKS: CandyTask[] = [
       }
       if (
         (get("gooseDronesRemaining") < 10 && numericModifier("Familiar Experience") < 23) ||
-        numericModifier("Item Drop") < 400 ||
+        numericModifier("Item Drop") < 399 ||
         numericModifier("Familiar Experience") < 10
       ) {
         abort("We couldn't cap our familiar exp and item drop!");
