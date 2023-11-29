@@ -208,6 +208,8 @@ function towerOnlyBonuses() {
       [
         [$item`Time Cloak`, 900],
         [$item`time-twitching toolbelt`, 900],
+        [$item`carnivorous potted plant`, 560],
+        [$item`mafia thumb ring`, 560],
       ] as [Item, number][]
     ).filter(([item]) => have(item))
   );
@@ -408,7 +410,9 @@ export function combatOutfit(towerCombat = false, base: OutfitSpec = {}): Outfit
     );
   }
 
-  outfit.modifier.push("10000 Familiar Experience 23 max");
+  if (get("gooseDronesRemaining") < 10) {
+    outfit.modifier.push("10000 Familiar Experience 23 max");
+  }
 
   if (adventureFamiliars.includes(outfit.familiar)) {
     weightValue = Math.round(MAGIC_NUMBER * baseAdventureValue() * 100) / 100;
@@ -428,17 +432,14 @@ export function combatOutfit(towerCombat = false, base: OutfitSpec = {}): Outfit
         1
       );
       weightValue = fullRate * stasisData.meatPerLb;
-    } else if (SongBoom.song() === "Total Eclipse of Your Meat") {
-      outfit.modifier.push("0.25 Meat Drop");
-    } else {
-      outfit.modifier.push("48 Item Drop 334 max");
     }
   }
-
-  if (weightValue) {
-    const rounded = Math.round(1000 * weightValue) / 1000;
-    outfit.modifier.push(`${rounded} Familiar Weight`);
+  if (SongBoom.song() === "Total Eclipse of Your Meat") {
+    outfit.modifier.push("0.45 Meat Drop");
+  } else {
+    outfit.modifier.push("0.2 Meat Drop");
   }
+  outfit.modifier.push("28 Item Drop 500 max");
 
   const bjornChoice = ensureBjorn(weightValue);
   if (have($item`Buddy Bjorn`)) {

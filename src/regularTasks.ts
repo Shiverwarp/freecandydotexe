@@ -152,6 +152,11 @@ const GLOBAL_TASKS: CandyTask[] = [
     limit: { tries: 1 },
   },
   {
+    name: "Set Boombox to Food",
+    completed: () => get("boomBoxSong") === "Food Vibrations" || get("_boomBoxSongsLeft") === 0,
+    do: () => cliExecute("boombox food"),
+  },
+  {
     name: "Ow!",
     completed: () => myHp() > 0,
     do: () => abort("Ow! I have 0 hp!"),

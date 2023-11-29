@@ -1,7 +1,7 @@
 import { trickOutfit } from "./outfit";
 import { CandyTask } from "./lib";
 import { CandyStrategy } from "./combat";
-import { $effect, $item, $location, have } from "libram";
+import { $effect, $item, $location, get, have } from "libram";
 import { abort, cliExecute, haveEffect, myAdventures, numericModifier, use } from "kolmafia";
 
 const TRICK_TREAT_TASKS: CandyTask[] = [
@@ -15,20 +15,19 @@ const TRICK_TREAT_TASKS: CandyTask[] = [
         use(taffyNeeded, $item`pulled blue taffy`);
       }
       if (numericModifier("Item Drop") < 234) {
-        cliExecute("tcrsgain 234 item 48 eff");
+        cliExecute("tcrsgain 400 item 28 eff");
       }
-      if (numericModifier("Familiar Experience") < 23) {
+      if (get("gooseDronesRemaining") < 10 && numericModifier("Familiar Experience") < 23) {
         cliExecute("tcrsgain 23 familiar experience 100 eff");
       }
-      if (numericModifier("Familiar Experience") < 23 || numericModifier("Item Drop") < 234) {
+      if (numericModifier("Familiar Experience") < 23 || numericModifier("Item Drop") < 400) {
         abort("We couldn't cap our familiar exp and item drop!");
       }
     },
-    // eslint-disable-next-line libram/verify-constants
-    do: $location`Spring Bros. Solenoids`,
-    outfit: trickOutfit,
+    do: $location`Moonshiners' Woods`,
+    outfit: () => trickOutfit(),
     combat: new CandyStrategy(),
-    choices: { 1514: 3 }, //Skip
+    choices: { 975: 2 }, //Skip
   },
 ];
 
