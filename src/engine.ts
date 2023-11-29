@@ -12,7 +12,7 @@ import {
   xpath,
 } from "kolmafia";
 import { CandyTask } from "./lib";
-import { $familiar, $item, clamp, Session } from "libram";
+import { $familiar, $item, clamp, PropertiesManager, Session } from "libram";
 
 export default class CandyEngine extends Engine<never, CandyTask> {
   session: Session;
@@ -55,5 +55,12 @@ export default class CandyEngine extends Engine<never, CandyTask> {
       const mpTarget = Math.min(150, myMaxmp());
       restoreMp(mpTarget);
     }
+  }
+
+  initPropertiesManager(manager: PropertiesManager): void {
+    super.initPropertiesManager(manager);
+    manager.set({
+      currentMood: "nepFarm",
+    });
   }
 }
