@@ -387,7 +387,7 @@ export function combatOutfit(towerCombat = false, recalc = false, base: OutfitSp
     base,
     new Error(`Failed to construct outfit from spec ${toJson(base)}`)
   );
-  outfit.equip(args.familiar);
+  outfit.equip($familiar`Grey Goose`);
 
   if (outfit.familiar === $familiar`Reagnimated Gnome`) {
     outfit.equip($item`gnomish housemaid's kgnee`);
