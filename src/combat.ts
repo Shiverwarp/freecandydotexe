@@ -1,4 +1,5 @@
 import {
+  $familiar,
   $familiars,
   $item,
   $items,
@@ -9,7 +10,7 @@ import {
   SourceTerminal,
   StrictMacro,
 } from "libram";
-import { Item, Skill } from "kolmafia";
+import { Item, myFamiliar, Skill } from "kolmafia";
 import { CombatStrategy } from "grimoire-kolmafia";
 import { shouldRedigitize } from "./lib";
 import args from "./args";
@@ -122,7 +123,10 @@ export class Macro extends StrictMacro {
         ...$skills`Curse of Weaksauce, Micrometeorite, Sing Along, Bowl Straight Up`,
         ...$items`porquoise-handled sixgun, Rain-Doh indigo cup`,
       ])
-        .skill($skill`Emit Matter Duplicating Drones`)
+        .externalIf(
+          myFamiliar() === $familiar`Grey Goose`,
+          Macro.skill($skill`Emit Matter Duplicating Drones`)
+        )
         .externalIf(SourceTerminal.isCurrentSkill($skill`Extract`), Macro.skill($skill`Extract`))
     ).kill();
   }
