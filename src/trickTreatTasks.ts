@@ -2,7 +2,16 @@ import { combatOutfit, trickOutfit } from "./outfit";
 import { CandyTask } from "./lib";
 import { CandyStrategy } from "./combat";
 import { $effect, $item, $location, get, have } from "libram";
-import { abort, cliExecute, haveEffect, myAdventures, numericModifier, print, use } from "kolmafia";
+import {
+  abort,
+  cliExecute,
+  haveEffect,
+  maximize,
+  myAdventures,
+  numericModifier,
+  print,
+  use,
+} from "kolmafia";
 
 const TRICK_TREAT_TASKS: CandyTask[] = [
   {
@@ -26,6 +35,7 @@ const TRICK_TREAT_TASKS: CandyTask[] = [
         numericModifier("Familiar Experience") < 10
       ) {
         print("Trying to recalculate outfit...", "yellow");
+        maximize("Item Drop", false);
         combatOutfit(true, true).dress();
       }
       if (
